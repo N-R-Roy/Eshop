@@ -6,6 +6,7 @@ from .views.login import Login
 
 app_name = 'store'
 
+
 urlpatterns = [
     path('', index, name="index"),
     path('signup/', Signup.as_view(), name="signup"),
