@@ -1,0 +1,37 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<!--body-->
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="list-group">
+        {% for category in categories %}
+        <a href="/?category={{category.id}}" class="list-group-item"
+          >{{category.name}}</a
+        >
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="row mx-auto">
+        {% for product in products%}
+        <div class="card mx-auto mb-3" style="width: 18rem">
+          <img
+            class="card-img-top"
+            src="{{product.image.url}}"
+            alt="Card image cap"
+            style="height: 200px"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.price}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
