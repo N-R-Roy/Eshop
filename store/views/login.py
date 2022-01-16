@@ -7,6 +7,8 @@ from django.views import View
 class Login(View):
 
     def get(self, request):
+        print("In login : ", dict(request.session))
+        print("In login : ", request.method)
         return render(request, "store/login.html")
 
     def post(self, request):
@@ -14,7 +16,6 @@ class Login(View):
         password = request.POST.get("password")
 
         customer = None
-
         try:
             customer = Customer.objects.get(email=email)
         except:
@@ -24,6 +25,8 @@ class Login(View):
         if customer:
             flag = check_password(password, customer.password)
             if flag:
+                request.session['customer_id'] = customer.id
+                request.session['customer_email'] = customer.email
                 return redirect("store:index")
             else:
                 err_msg = "Invalid email or password"

@@ -1,7 +1,10 @@
 {% extends 'store/base.html' %}
 
+{% load cart %}
+
 {% block content %}
 <!--body-->
+<h1>{{sdata}}</h1>
 <div class="container-fluid p-3">
   <div class="row">
     <div class="col-lg-3">
@@ -26,7 +29,21 @@
           <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.price}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            {{ product | is_in_cart:request.session.cart }}
+            <form action="/" method="post">
+              {% csrf_token %}
+              <input
+                type="text"
+                hidden
+                name="product_id"
+                value="{{product.id}}"
+              />
+              <input
+                type="submit"
+                value="Add to cart"
+                class="btn btn-primary"
+              />
+            </form>
           </div>
         </div>
         {% endfor %}
