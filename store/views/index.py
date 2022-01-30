@@ -2,12 +2,20 @@
 from django.shortcuts import render, redirect
 from store.models import Product, Category
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 
 
 class Index(View):
 
     def get(self, request):
+
+        # request.session["Hello"] = "This is homepage"
+
+        # print("This is method : ", request.method)
+        # print("This is post : ", request.POST)
+        # print("This is get : ", dict(request.GET))
+        # print("This is session : ", dict(request.session))
+
+        # print(">>>>>>>>>>>>>>>>>>>>>>", request.session['customer_email'])
 
         if dict(request.session):
             if request.session.get("customer_email"):
@@ -33,16 +41,27 @@ class Index(View):
 
         return render(request, "store/index.html", data)
 
-    @csrf_exempt
     def post(self, request):
+        # print("This is method : ", request.method)
+        # print("This is post : ", request.POST)
+        # print("This is get : ", dict(request.GET))
+        # print("This is session : ", dict(request.session))
+
         product_id = request.POST.get("product_id")
+        remove = request.POST.get("remove")
 
         cart = request.session.get('cart')
 
         if cart:
             quantity = cart.get(product_id)
             if quantity:
-                cart[product_id] = cart[product_id] + 1
+                if remove:
+                    if quantity == 1:
+                        cart.pop(product_id)
+                    else:
+                        cart[product_id] = cart[product_id] - 1
+                else:
+                    cart[product_id] = cart[product_id] + 1
             else:
                 cart[product_id] = 1
         else:
@@ -73,6 +92,7 @@ class Index(View):
 #     data = {"products": product_list, "categories": category_list}
 #
 #     return render(request, "store/index.html", data)
+
 
 
 

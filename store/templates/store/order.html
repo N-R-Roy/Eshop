@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+
+{% load cart %}
+{% load custom_filter %}
+
+{% block content %}
+<div class="container">
+  <div class="border rounded p-4">
+    <p class="p1 display-4 text-center">Your Order</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Slno.</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td class="cimg">
+            <img
+              class="rounded-circle"
+              style="height: 70px; width: 50px"
+              src="{{order.product.image.url}}"
+              alt="product pic"
+            />
+          </td>
+          <td>{{order.product.name}}</td>
+          <td>{{order.order_date}}</td>
+          <td>{{order.product.price|add_currency_sign}}</td>
+          <td>{{order.quantity}}</td>
+          <td>
+            {{order.product.price|multiply_price:order.quantity|add_currency_sign}}
+          </td>
+          {% if order.status %}
+          <td class="badge badge-success">Complate</td>
+          {% else %}
+          <td class="badge badge-danger">Pending</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

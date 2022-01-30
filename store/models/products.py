@@ -10,6 +10,9 @@ class Product(models.Model):
     description = models.CharField(max_length=400, default="")
     image = models.ImageField(upload_to='upload/products/')
 
+    def __str__(self):
+        return str(self.id)
+
     @staticmethod
     def get_all_product():
         return Product.objects.all()
@@ -17,4 +20,8 @@ class Product(models.Model):
     @staticmethod
     def get_product_by_category_id(category_id):
         return Product.objects.filter(category=category_id)
+
+    @staticmethod
+    def get_cart_product(ids):
+        return Product.objects.filter(id__in = ids)
 
