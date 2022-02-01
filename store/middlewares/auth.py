@@ -15,6 +15,7 @@ def auth_middleware(get_response):
         # print(request.META['PATH_INFO'])
 
         request_url = request.META["PATH_INFO"]
+        print("RRurl >> ", request_url)
 
         if not request.session.get("customer_id"):
             return redirect(f'/login/?request_url={request_url}')

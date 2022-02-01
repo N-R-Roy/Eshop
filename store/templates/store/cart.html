@@ -68,7 +68,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="/check-out/" method="post" >
+            <form action="{% url 'store:checkout' %}" method="post" >
               {% csrf_token %}
               <div class="form-group">
                 <label for="address">Address</label>

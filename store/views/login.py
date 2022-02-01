@@ -7,10 +7,12 @@ from django.views import View
 class Login(View):
 
     request_url = None
+    request_value = None
 
     def get(self, request):
         print(request.GET.get('request_url'))
         Login.request_url = request.GET.get('request_url')
+        Login.request_value = request.GET.get('request_value')
         # print("In login : ", dict(request.session))
         # print("In login : ", request.method)
         return render(request, "store/login.html")
@@ -32,8 +34,11 @@ class Login(View):
                 request.session['customer_id'] = customer.id
                 request.session['customer_email'] = customer.email
                 print(Login.request_url)
-                if Login.request_url:
+                if Login.request_url == '/order/':
                     return HttpResponseRedirect('/order/')
+                elif Login.request_url == '/check-out/':
+                    # return HttpResponseRedirect('/check-out/')
+                    return redirect('store:cart')
                 else:
                     return redirect("store:index")
             else:
