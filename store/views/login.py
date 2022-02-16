@@ -29,8 +29,8 @@ class Login(View):
 
         err_msg = ""
         if customer:
-            flag = check_password(password, customer.password)
-            if flag:
+            valid_customer = check_password(password, customer.password)
+            if valid_customer:
                 request.session['customer_id'] = customer.id
                 request.session['customer_email'] = customer.email
                 print(Login.request_url)
@@ -85,6 +85,10 @@ class Login(View):
 # print(datetime.datetime.today().time().hour)
 # print(datetime.datetime.today().time().second)
 # print(datetime.datetime.today().time().microsecond)
+
+
+
+
 
 
 
