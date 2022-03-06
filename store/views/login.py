@@ -33,6 +33,7 @@ class Login(View):
             if valid_customer:
                 request.session['customer_id'] = customer.id
                 request.session['customer_email'] = customer.email
+
                 print(Login.request_url)
                 if Login.request_url == '/order/':
                     return HttpResponseRedirect('/order/')
