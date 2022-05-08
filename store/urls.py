@@ -7,6 +7,8 @@ from .views.cart import Cart
 from .views.checkout import CheckOut
 from .views.order import OrderView
 from .views.search import Search
+from .views.detail import Detail
+from store.views.about import about
 from store.middlewares.auth import auth_middleware
 
 
@@ -22,5 +24,7 @@ urlpatterns = [
     path('order/', auth_middleware(OrderView.as_view()), name="order"),
     # path('order/', OrderView.as_view(), name="order"),
     path('search-product/', Search.as_view(), name="search-product"),
+    path('about/', about, name='about'),
+    path('detail/<int:p_id>/', Detail.as_view(), name='detail'),
 ]
 

@@ -14,7 +14,7 @@
       </div>
       {% endif %}
 
-      <form action="/signup/" method="post">
+      <form action="/signup/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- Firstname -->
@@ -37,6 +37,32 @@
             type="text"
             name="lname"
             id="lname"
+            class="form-control form-control-sm"
+            value="{{val.lname}}"
+            placeholder=""
+          />
+        </div>
+
+        <!-- Image -->
+        <div class="form-group">
+          <label for="uimg">Image</label>
+          <input
+            type="file"
+            name="uimg"
+            id="uimg"
+            class="form-control form-control-sm"
+            value=""
+            placeholder=""
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+          <label for="lname">Address</label>
+          <input
+            type="text"
+            name="address"
+            id="address"
             class="form-control form-control-sm"
             value="{{val.lname}}"
             placeholder=""

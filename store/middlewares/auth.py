@@ -14,11 +14,17 @@ def auth_middleware(get_response):
         # print(len(dict(request.META)))
         # print(request.META['PATH_INFO'])
 
-        request_url = request.META["PATH_INFO"]
-        print("RRurl >> ", request_url)
-
         if not request.session.get("customer_id"):
-            return redirect(f'/login/?request_url={request_url}')
+            request_url = request.META["PATH_INFO"]
+            print("RRurl >> ", request_url)
+            if request_url == "/check-out/":
+                address = request.POST.get("address")
+                mob_no = request.POST.get("mob_no")
+                print("Addresssssssssssssss ------->", address)
+                print("Mobbbbbbbbbbbbbbbbbbbbb ---->", mob_no)
+                return redirect(f'/login/?request_url={request_url}&address={address}&mob_no={mob_no}')
+            else:
+                return redirect(f'/login/?request_url={request_url}')
 
         response = get_response(request)
 
@@ -57,6 +63,33 @@ def auth_middleware(get_response):
 #
 # print(result)
 
+
+
+
+
+# def div_num(num1, num2):
+#     return num1 / num2
+#
+#
+# def modify(func):
+#
+#     def nwfunnc(num1, num2):
+#
+#         if num2 == 0:
+#             return "Division by zero is not possible"
+#
+#         num1 = num1 * 10
+#
+#         result = func(num1, num2)
+#
+#         return "Result is = %.3f" % result
+#
+#     return nwfunnc
+#
+#
+# div_num = modify(div_num)
+#
+# print(div_num(5, 2))
 
 
 

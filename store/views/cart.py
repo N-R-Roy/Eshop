@@ -10,7 +10,7 @@ class Cart(View):
     def get(self, request):
 
         cart = request.session.get("cart")
-        print("In cart >>>>>>>>>>>>>>>>> ", cart)
+        # print("In cart >>>>>>>>>>>>>>>>> ", cart)
 
         products = None
         if cart:
@@ -18,6 +18,7 @@ class Cart(View):
             products = Product.get_cart_product(cart_id)
 
         return render(request, "store/cart.html", {"products": products})
+
 
 
 

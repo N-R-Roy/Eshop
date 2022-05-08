@@ -23,5 +23,5 @@ class Product(models.Model):
 
     @staticmethod
     def get_cart_product(ids):
-        return Product.objects.filter(id__in = ids)
+        return Product.objects.filter(id__in=ids)
 

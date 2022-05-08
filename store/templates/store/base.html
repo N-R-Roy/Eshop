@@ -33,31 +33,64 @@
       }
     </style>
 
-    <title>Homepage</title>
+    <title>{% block title %}{% endblock title%}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Eshop</a>
+    <!--nav bar-->
+    <nav style="background-color:lightgray;" class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/">
+        {% load static %}
+        <img src="{% static 'store/eshop.jpg' %}" alt="Eshop">
+      </a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div
+        class="collapse navbar-collapse text-light"
+        id="navbarSupportedContent"
+      >
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/"
-              >Store <span class="sr-only">(current)</span></a
+            <a class="nav-link" href="{% url 'store:about' %}"
+              >About <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item">
             <form class="form-inline" action="/search-product/" method="post">
               {% csrf_token %}
-              <input name="product_name" class="form-control mr-sm-2" type="search" placeholder="Enter product name here" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input
+                name="product_name"
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Enter product name here"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
             </form>
           </li>
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
+          {% if request.session.customer_email %}
+          
+          <li class="nav-item rounded-circle bg-success">
+            
+            <a class="nav-link" href="/order/"
+              >
+              {% if user %}
+              <img class="rounded-circle"
+                   src="{{user.image.url}}"
+                   style="width:35px; height:30px;">
+              {% endif %}
+              {{request.session.customer_name}} <span class="sr-only">(current)</span></a
+            >
+          </li>
+          {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="/cart/"
+            <a class="nav-link" href="{% url 'store:cart' %}"
               >Cart
               <span class="badge badge-info"
                 >{{ request.session.cart.keys|length}}</span
@@ -82,13 +115,53 @@
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
           </li>
-
           {% endif %}
         </ul>
       </div>
     </nav>
 
-    {% block content %}{% endblock content%}
+    {% block content %}
+    {% endblock content%}
+
+    <!--footer-->
+    <div class="container-fluid text-center bg-dark p-4">
+      <div class="row">
+          <h4 style="text-align:center; margin:auto; color:white;">This is footer</h4>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div style="color:white;">Link List1</div>
+          <div><a href="#">Link1</a></div>
+          <div><a href="#">Link2</a></div>
+          <div><a href="#">Link3</a></div>
+          <div><a href="#">Link4</a></div>
+          <div><a href="#">Link5</a></div>
+        </div>
+
+        <div class="col-lg-4">
+          <div style="color:white;">Link List1</div>
+          <div><a href="#">Link1</a></div>
+          <div><a href="#">Link2</a></div>
+          <div><a href="#">Link3</a></div>
+          <div><a href="#">Link4</a></div>
+          <div><a href="#">Link5</a></div>
+        </div>
+
+        <div class="col-lg-4">
+          <div style="color:white;">Link List1</div>
+          <div><a href="#">Link1</a></div>
+          <div><a href="#">Link2</a></div>
+          <div><a href="#">Link3</a></div>
+          <div><a href="#">Link4</a></div>
+          <div><a href="#">Link5</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+          <h6 style="text-align:center; margin:auto;" class="text-white text-center">Copyright</h6>
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

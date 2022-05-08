@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from store.models import Customer
 from django.views import View
+from django.core.files.storage import FileSystemStorage
 
 
 def validate_user(customer):
@@ -25,17 +26,27 @@ def register_user(request):
 
     fname = data.get("fname")
     lname = data.get("lname")
+    address = data.get("address")
     email = data.get("email")
     password = data.get("password")
+
+    uimg = request.FILES['uimg']
+
+    fs = FileSystemStorage(location='media/upload/user')
+
+    filename = fs.save(uimg.name, uimg)
 
     value = {
         'fname': fname,
         'lname': lname,
+        'address': address,
         'email': email,
     }
 
     customer_obj = Customer(first_name=fname,
                             last_name=lname,
+                            image='upload/user/'+str(filename),
+                            address=address,
                             email=email,
                             password=make_password(password))
 
@@ -48,6 +59,10 @@ def register_user(request):
 
     if not err_msg:
         customer_obj.save()
+
+        request.session['customer_id'] = customer_obj.id
+        request.session['customer_email'] = customer_obj.email
+        request.session['customer_name'] = customer_obj.first_name
 
         return redirect('store:index')
     else:
@@ -69,3 +84,4 @@ class Signup(View):
 #         return render(request, 'store/signup.html')
 #     else:
 #         return register_user(request)
+

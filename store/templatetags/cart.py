@@ -35,4 +35,12 @@ def convert_dict(value):
     return dict(value)
 
 
+@register.filter("is_fill")
+def is_fill(value):
+    if value:
+        return value
+    else:
+        return ""
+
+
 

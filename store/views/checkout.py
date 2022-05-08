@@ -6,11 +6,11 @@ from store.models import Product, Order, Customer
 
 class CheckOut(View):
 
-    def post(self, request):
+    def get(self, request):
         print("This is in post >>>>>>>>>>>>>>>>>>>> ", request.POST)
 
-        address = request.POST.get("address")
-        mob_no = request.POST.get("mob_no")
+        address = request.GET.get("address")
+        mob_no = request.GET.get("mob_no")
 
         customer_id = request.session.get("customer_id")
         print("CID ", customer_id)
