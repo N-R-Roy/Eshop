@@ -1,11 +1,9 @@
-
 from django.shortcuts import render, redirect
 from store.models import Product, Category, Customer
 from django.views import View
 
 
 class Index(View):
-
     def get(self, request):
 
         # request.session["Hello"] = "This is homepage"

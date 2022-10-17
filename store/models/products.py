@@ -10,6 +10,9 @@ class Product(models.Model):
     description = models.CharField(max_length=400, default="")
     image = models.ImageField(upload_to='upload/products/')
 
+    class Meta:
+        verbose_name = "Productt"
+
     def __str__(self):
         return str(self.id)
 

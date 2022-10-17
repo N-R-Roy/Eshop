@@ -1,5 +1,10 @@
-{% extends 'store/base.html' %} {% block title %}Homepage{% endblock title %}
-{%load cart %} {% load custom_filter %} {% block content %}
+{% extends 'store/base.html' %}
+{% block title %}Homepage{% endblock title %}
+
+{%load cart %}
+{% load custom_filter %}
+
+{% block content %}
 <!--body-->
 <div class="container-fluid p-0 mt-0">
   <div class="row">
@@ -59,7 +64,7 @@
                 <div
                   class="d-inline mx-auto rounded text-center bg-primary text-dark font-weight-bold px-3"
                 >
-                  {{ product.id|cart_in_quantity:request.session.cart }} in cart
+                  <strong>{{ product.id|cart_in_quantity:request.session.cart }} in cart</strong>
                 </div>
                 <div>
                   <form action="/#{{ product.id }}" method="post">

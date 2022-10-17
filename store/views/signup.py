@@ -71,7 +71,6 @@ def register_user(request):
 
 
 class Signup(View):
-
     def get(self, request):
         return render(request, 'store/signup.html')
 

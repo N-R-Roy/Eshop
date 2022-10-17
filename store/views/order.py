@@ -6,7 +6,6 @@ from django.utils.decorators import method_decorator
 
 
 class OrderView(View):
-
     # @method_decorator(auth_middleware)
     def get(self, request):
         customer_id = request.session.get("customer_id")

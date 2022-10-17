@@ -5,7 +5,6 @@ from store.models import Product, Order, Customer
 
 
 class CheckOut(View):
-
     def get(self, request):
         print("This is in post >>>>>>>>>>>>>>>>>>>> ", request.POST)
 

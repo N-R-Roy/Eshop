@@ -6,9 +6,7 @@ from store.models.products import Product
 
 
 class Cart(View):
-
     def get(self, request):
-
         cart = request.session.get("cart")
         # print("In cart >>>>>>>>>>>>>>>>> ", cart)
 
