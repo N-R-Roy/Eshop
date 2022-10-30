@@ -35,7 +35,7 @@ def auth_middleware(get_response):
 
     return middleware
 
-
+#
 # def my_decorator(func):
 #
 #     def inner_func(text):
@@ -59,11 +59,15 @@ def auth_middleware(get_response):
 #
 # # my_func = my_decorator(my_func)
 #
-# result = my_func("Hello")
+# result1 = my_func("Hello")
 #
-# print(result)
-
-
+# print(result1)
+#
+# result2 = my_func("Hi")
+#
+# print(result2)
+#
+#
 # def div_num(num1, num2):
 #     return num1 / num2
 #
@@ -87,6 +91,6 @@ def auth_middleware(get_response):
 # div_num = modify(div_num)
 #
 # print(div_num(5, 2))
-
-
-
+#
+#
+#

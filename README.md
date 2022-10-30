@@ -1,2 +1,2 @@
 # Eshop
-This is an ecommerce website
+This is an ecommerce website.
