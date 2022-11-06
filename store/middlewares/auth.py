@@ -35,8 +35,10 @@ def auth_middleware(get_response):
 
     return middleware
 
+
 #
 # def my_decorator(func):
+#     print("jkjidk")
 #
 #     def inner_func(text):
 #
