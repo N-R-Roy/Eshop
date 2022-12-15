@@ -28,6 +28,7 @@ from django.views.static import serve
 urlpatterns = [
     path('', include('store.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     # """This is work when debug is off"""
     # re_path(r'^%s(?P<path>.*)$' % re.escape(settings.STATIC_URL.lstrip('/')), serve, kwargs={'document_root':settings.STATIC_ROOT}),
     # re_path(r'^%s(?P<path>.*)$' % re.escape(settings.MEDIA_URL.lstrip('/')), serve, kwargs={'document_root':settings.MEDIA_ROOT}),
